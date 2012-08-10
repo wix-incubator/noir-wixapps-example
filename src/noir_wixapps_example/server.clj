@@ -20,10 +20,18 @@
   (let [[given-hmac signed-instance] (clojure.string/split  instance #"\.")]
     (json/parse-string (String. (Base64/decodeBase64 (.getBytes signed-instance))))))
 
+(defn check-owner [instance]
+  (let [parsed-instance (parse-instance instance)]
+  (get parsed-instance "permissions")))
+
 (defpage "/test" {:keys [instance]}
   (main-layout
     [:p (parse-instance instance)]))
 
+(defpage "/settings" {:keys [instance]}
+  ()
+
+  )
 
 (defn -main [& m]
   (let [mode (keyword (or (first m) :dev))
