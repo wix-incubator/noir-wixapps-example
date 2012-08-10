@@ -41,4 +41,4 @@
                         :ns 'noir-wixapps-example})))
 
 (server/add-middleware wrap-params)
-(server/add-middleware wrap-wixapps-middleware {:algorithm "HmacSHA256" :secret-key "d245bbf8-57eb-49d6-aeff-beff6d82cd39"})
+(server/add-middleware wrap-wixapps-middleware {:algorithm "HmacSHA256" :secret-key "49ac16a2-1fb3-44c6-9f4a-30ac8cc45562"})
