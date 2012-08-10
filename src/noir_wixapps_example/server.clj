@@ -26,12 +26,12 @@
 
 (defpage "/widget" {:keys [instance]}
   (main-layout "Widget"
-    [:p (parse-instance  instance)]))
+    [:p (parse-instance  instance) "widget test"]))
 
 (defpage "/settings" {:keys [instance]}
   (if (check-owner instance)
     (main-layout  "Owner"
-      [:p  (parse-instance instance)])
+      [:p  (parse-instance instance) "settings test"])
     {:status 403 :body "Owner permissions required"}))
 
 (defn -main [& m]
