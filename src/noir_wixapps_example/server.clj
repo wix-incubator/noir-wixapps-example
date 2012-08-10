@@ -9,10 +9,10 @@
         hiccup.form-helpers
         hiccup.page-helpers))
 
-(defpartial main-layout [& content]
+(defpartial main-layout [title content]
   (html5
     [:head
-     [:title "WixApps example"]]
+     [:title "WixApps example: " title]]
     [:body
      content]))
 
@@ -24,14 +24,15 @@
   (let [parsed-instance (parse-instance instance)]
   (get parsed-instance "permissions")))
 
-(defpage "/test" {:keys [instance]}
-  (main-layout
-    [:p (parse-instance instance)]))
+(defpage "/widget" {:keys [instance]}
+  (main-layout "Widget"
+    [:p (parse-instance  instance)]))
 
 (defpage "/settings" {:keys [instance]}
-  ()
-
-  )
+  (if (check-owner instance)
+    (main-layout  "Owner"
+      [:p  (parse-instance instance)])
+    {:status 403 :body "Owner permissions required"}))
 
 (defn -main [& m]
   (let [mode (keyword (or (first m) :dev))
